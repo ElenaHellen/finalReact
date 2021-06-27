@@ -3,10 +3,10 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Redirect } from "react-router-dom";
 import Route from "./components/route";
 
-import RegisterPage from "../src/containers/index";
+import RegisterPage from "../src/containers/registerContainer";
 import LoginPage from "../src/containers/LoginContainer";
 
-import { root} from "./AppRoutes";
+import { root, login} from "./AppRoutes";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path={root} component={RegisterPage} />
-          <Route path={root} component={LoginPage} />
+          <Route path={login} component={LoginPage} />
           
           <Redirect to={root} />
         </Switch>
