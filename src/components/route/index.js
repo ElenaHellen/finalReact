@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route } from "react-router";
 
 const DefaultRoute = ({ component: Component, isAuthorized, isAuthenticated, ...rest }) => (
-  <Route {...rest} render={(props) => <Component {...props} />} />
+  <Route {...rest} render={(props) => <Component {...props} /> } />
 );
 
 DefaultRoute.propTypes = {

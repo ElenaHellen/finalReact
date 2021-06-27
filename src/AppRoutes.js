@@ -1,2 +1,2 @@
 export const root = "/";
-export const login="/login"
+export const login = "/login"

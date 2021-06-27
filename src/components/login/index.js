@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 // import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import { Grid, Button } from "@material-ui/core";
@@ -29,6 +29,7 @@ const Login = ({ initialFormValues, onLogin }) => {
             <Button fullWidth variant="contained" color="primary" type="submit">
               Sign In
             </Button>
+            <Link to="/register" className="btn btn-link">Register</Link>
           </Grid>
         </Grid>
       </Form>

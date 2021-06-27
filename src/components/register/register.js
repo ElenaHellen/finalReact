@@ -13,9 +13,10 @@ const renderField = ({ type, label, input, meta: { touched, error }}) => (
   </div>
 )
 
-const submit = ({ firstName='', lastName='', email='', password=''}) => {
+const submit = ({ firstName='', lastName=''}) => {
   let error = {};
   let isError  = false;
+  
   if (firstName.trim() === '') {
     error.firstName = "Required";
     isError = true;
@@ -28,15 +29,6 @@ const submit = ({ firstName='', lastName='', email='', password=''}) => {
 
   if (lastName.trim() === '') {
     error.lastName = "Required";
-    isError = true;
-  }
-
-  if (email.trim() === '') {
-    error.email = "Required";
-    isError = true;
-  }
-  if (password.trim() === '') {
-    error.password = "Required";
     isError = true;
   }
 
@@ -55,17 +47,20 @@ const ContactFormFunc = ({
   onChangePassword, 
   email, 
   isEnabled, 
-  password
+  password,
+  firstname
 }) => (
   
     <form onSubmit={handleSubmit(submit)}>
-      <div>Регистация</div>
+      <div>Авторизация</div>
+      <br />
       <br />
       <Field 
       name="firstName" 
       label = "First Name" 
       component={renderField} 
       type="text"  
+      
       />
       <Field 
       name="lastName" 
@@ -93,10 +88,11 @@ const ContactFormFunc = ({
       <br />
         <Button variant="contained" disabled={!isEnabled}>Submit</Button>
        
-        
+        <Link to = "/login">Login</Link>
     </form> 
      
 )
+
 
 const ContactForm = reduxForm({
   // a unique name for the form
