@@ -20,17 +20,18 @@ const Login = ({ initialFormValues, onLogin }) => {
       <Form autoComplete="off">
         <Grid container direction="column" spacing={1}>
           <Grid item>
-            <Field color="secondary" name="email" label="Email" type="email" />
+            <Field color="secondary" name="email" label="Email" type="email" placeholder = "Email" />
           </Grid>
           <Grid item>
-            <Field color="secondary" name="password" label="Password" type="password" />
+            <Field color="secondary" name="password" label="Password" type="password" placeholder = "Password" />
           </Grid>
           <Grid item>
-            <Button fullWidth variant="contained" color="primary" type="submit">
+            <Button  variant="contained" color="primary" type="submit">
               Sign In
             </Button>
-            <Link to="/register" className="btn btn-link">Register</Link>
-          </Grid>
+            </Grid>
+            <Link to="/register">Register</Link>
+          
         </Grid>
       </Form>
     </Formik>
