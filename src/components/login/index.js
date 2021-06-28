@@ -30,7 +30,7 @@ const Login = ({ initialFormValues, onLogin }) => {
               Sign In
             </Button>
             </Grid>
-            <Link to="/register">Register</Link>
+            <Link to="./register">Register</Link>
           
         </Grid>
       </Form>
