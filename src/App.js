@@ -13,7 +13,7 @@ function App() {
     <Router>
           <div className="App">
         <Switch>
-          <Route path={register} component={RegisterPage} />
+          <Route path={root} component={RegisterPage} />
           <Route path={login} component={Login} />
           <Redirect to={root} />
         </Switch>
