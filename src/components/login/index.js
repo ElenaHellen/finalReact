@@ -30,8 +30,9 @@ const Login = ({ initialFormValues, onLogin }) => {
               Sign In
             </Button>
             </Grid>
-            <Link to="./register">Register</Link>
-          
+            <Grid>
+            Нет аккаунта? <Link to="./register">Register</Link>
+            </Grid>
         </Grid>
       </Form>
     </Formik>
