@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from "react-router-dom"
 
 const validate = values => {
     const errors = {}
@@ -21,7 +22,7 @@ const validate = values => {
       if (!values.password) {
         errors.password = 'Required'
       } else if (!/^[A-Z]*$/(values.password)) {
-        errors.password = 'Minimum be 2 characters or more'
+        errors.password = 'Invalid password'
       }
     return errors
   }
@@ -55,6 +56,7 @@ let FormCode = props => {
       <div className="form-group">
         <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
       </div>
+      <Link to = "./login">Login</Link>
     </form>
   )
 }
