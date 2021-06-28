@@ -20,7 +20,12 @@ class LoginContainer extends React.Component {
       email: "",
       password: "",
     };
-    return <Login initialFormValues={initialFormValues} onLogin={this.OnLoginUser} />;
+    return <div className="container">
+    <h3 className="form">Вход</h3>
+    <br />
+    <Login initialFormValues={initialFormValues} onLogin={this.OnLoginUser} />
+    
+  </div>
   }
 }
 const mapStateToProps = (state) => {
