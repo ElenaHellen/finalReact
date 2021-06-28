@@ -56,7 +56,7 @@ let FormCode = props => {
       <div className="form-group">
         <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
       </div>
-      <Link to = "./login">Login</Link>
+      Есть аккаунт? <Link to = "./login">Login</Link>
     </form>
   )
 }
