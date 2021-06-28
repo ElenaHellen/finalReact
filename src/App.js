@@ -6,17 +6,15 @@ import Route from "./components/route";
 import RegisterPage from "../src/containers/registerContainer";
 import Login from "../src/containers/LoginContainer";
 
-import { root, login} from "./AppRoutes";
+import { root, login,register} from "./AppRoutes";
 
 function App() {
   return (
     <Router>
           <div className="App">
         <Switch>
-        
-          <Route path={root} component={RegisterPage} />
+          <Route path={register} component={RegisterPage} />
           <Route path={login} component={Login} />
-          
           <Redirect to={root} />
         </Switch>
       </div>
