@@ -1,102 +1,66 @@
-import React from 'react'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 
-const renderField = ({ type, label, input, meta: { touched, error }}) => (
-  <div className="input-row">
-    <label>{label}</label>
-    <br />
-    <input {...input} type={type}/>
-    {touched && error && 
-     <span className="error">{error}</span>}
-  </div>
-)
-
-const submit = ({ firstName='', lastName=''}) => {
-  let error = {};
-  let isError  = false;
-  
-  if (firstName.trim() === '') {
-    error.firstName = "Required";
-    isError = true;
+const validate = values => {
+    const errors = {}
+    if (!values.firstName) {
+      errors.firstName = 'Required'
+    } else if (values.firstName.length < 2) {
+      errors.firstName = 'Minimum be 2 characters or more'
+    }
+    if (!values.email) {
+      errors.email = 'Required'
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = 'Invalid email address'
+    }
+    if (!values.lastName) {
+        errors.lastName = 'Required'
+      } else if (values.lastName.length < 2) {
+        errors.lastName = 'Minimum be 2 characters or more'
+      }
+      if (!values.password) {
+        errors.password = 'Required'
+      } else if (!/^[A-Z]*$/(values.password)) {
+        errors.password = 'Minimum be 2 characters or more'
+      }
+    return errors
   }
 
-  if (firstName.length > 10) {
-    error.firstName = "Long";
-    isError = true;
-  }
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+    <div>
+      <label className="control-label">{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} className="form-control" />
+        {touched && ((error && <span className="text-danger">{error}</span>) || (warning && <span>{warning}</span>))}
+      </div>
+    </div>
+  )
 
-  if (lastName.trim() === '') {
-    error.lastName = "Required";
-    isError = true;
-  }
-
-if (isError) {
-  throw new SubmissionError(error);
-  
-} else {
-  //submit form to server
-  console.log('Submit Validation')
+let FormCode = props => {
+  const { handleSubmit, pristine, submitting } = props;
+  return (
+    <form onSubmit={ handleSubmit }>
+      <div className="form-group">
+        <Field name="firstName" component={renderField} label="First Name" />
+      </div>
+      <div className="form-group">
+        <Field name="lastName" component={renderField} label="Last Name" />
+      </div>
+      <div className="form-group">
+        <Field name="email" component={renderField} label="Email" />
+      </div>
+      <div className="form-group">
+        <Field name="password" component={renderField} label="Password" />
+      </div>
+      <div className="form-group">
+        <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  )
 }
-}
+FormCode = reduxForm({
+  form: 'contact',
+  validate,
+})(FormCode);
 
-const ContactFormFunc = ({ 
-  handleSubmit, 
-  onChangeEmail, 
-  onChangePassword, 
-  email, 
-  isEnabled, 
-  password,
-  firstname
-}) => (
-  
-    <form onSubmit={handleSubmit(submit)}>
-      <div>Авторизация</div>
-      <br />
-      <br />
-      <Field 
-      name="firstName" 
-      label = "First Name" 
-      component={renderField} 
-      type="text"  
-      
-      />
-      <Field 
-      name="lastName" 
-      label = "Last Name"
-      component={renderField} 
-      type="text" 
-      />
-      <Field
-       name="email"
-       label = "Email"
-       component={renderField} 
-       type="email" 
-       placeholder="you@email.com"
-       value={password} 
-       onChange={onChangeEmail} 
-       />
-      <Field 
-      name="password" 
-      label = "Password "
-      component={renderField} 
-      type="password"  
-      value={email}
-      onChange={onChangePassword}
-      />
-      <br />
-        <Button variant="contained" disabled={!isEnabled}>Submit</Button>
-       
-        <Link to = "/login">Login</Link>
-    </form> 
-     
-)
-
-
-const ContactForm = reduxForm({
-  // a unique name for the form
-  form: 'contact'
-})(ContactFormFunc)
-
-export default ContactForm
+export default FormCode;
